@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysqlvol:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: defaultpassword
+      MYSQL_DATABASE: trivago_accommodation 
+  laravel:
+    build: .
+    ports:
+      - "3030:80"
+    links:
+      - mysql
+volumes:
+   mysqlvol:
